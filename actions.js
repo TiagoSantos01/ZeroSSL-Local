@@ -5,16 +5,16 @@ const { getInput, setInput, exec, env } = require('./util');
     else
         await env();
 
-    await exec('node ../SSL/CheckCertificate/checkCertificate')
+    await exec('node ./repo/ZeroSSL/CheckCertificate/checkCertificate')
     if (!getInput("id")) {
         console.info("Valid CRS ....")
-        await exec('node ../SSL/ValidCSR/validCSR.js')
+        await exec('node ./repo/ZeroSSL/ValidCSR/validCSR.js')
 
         if (getInput("valid")) {
             console.info("Valid CRS success")
             console.info("Create Certificate ...")
 
-            await exec('node ../SSL/CreateCertificate/createCertificate.js')
+            await exec('node ./repo/ZeroSSL/CreateCertificate/createCertificate.js')
             if (getInput("id")) {
                 console.info("Create Certificate to success")
                 console.info("Set Config DNS ...")
@@ -22,7 +22,7 @@ const { getInput, setInput, exec, env } = require('./util');
                 setInput("name", getInput("cname_validation_p1"))
                 setInput("value", getInput("cname_validation_p2"))
                 setInput("ttl", getInput("cname_validation_ttl"))
-                await exec('node ../Cpanel/DNS/EditZone/editzone.js')
+                await exec('node ./repo/Cpanel/DNS/EditZone/editzone.js')
                 if (getInput("success")) {
                     console.info("Set Config DNS in success")
 
@@ -30,7 +30,7 @@ const { getInput, setInput, exec, env } = require('./util');
                     setInput("validation_method", "CNAME_CSR_HASH")
                     console.info("Check Dns ....")
 
-                    await exec('node ../SSL/CheckDNS/checkDNS.js')
+                    await exec('node ./repo/ZeroSSL/CheckDNS/checkDNS.js')
                     if (getInput("valid") == 'true') {
                         console.info("Check Dns in success")
 
@@ -52,6 +52,6 @@ const { getInput, setInput, exec, env } = require('./util');
         setInput("ssl-id", getInput("id"))
         console.info("Download Certificate in " + getInput("ssl-path"))
 
-        await exec('node ../SSL/DownloadCertificate/downloadCertificate.js')
+        await exec('node ./repo/ZeroSSL/DownloadCertificate/downloadCertificate.js')
     }
 })()
