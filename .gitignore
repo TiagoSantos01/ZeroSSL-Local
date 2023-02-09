@@ -3,4 +3,3 @@ env/*
 repo/*
 !repo/.git*
 ssl/*
-env/env.json
