@@ -20,9 +20,9 @@ async function output(exit) {
         }
     })
 }
-const exec = async(command) => {
+const exec = async(command,env=process.env) => {
     try {
-        const { stdout, stderr } = await execute(command);
+        const { stdout, stderr } = await execute(command,options={env:env});
         await output(stdout);
     } catch (err) {
         console.error(err);
