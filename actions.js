@@ -51,7 +51,7 @@ const { getInput, setInput, exec, env } = require('./util');
         console.error("Valid CRS fail")
         return
     }
-    if (getInput("id") && (getInput("valid") == '' || getInput("valid") == 'true')) {
+    if ((getInput("id") && getInput("valid") == '') ||(!getInput("id") && getInput("valid") == 'true')) {
         setInput("ssl_id", getInput("id"))
         console.info("Download Certificate in " + getInput("ssl_path"))
 
